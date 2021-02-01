@@ -274,10 +274,10 @@ class Command < Thor
   def db
     return @client if @client
     @client = Mysql2::Client.new(
-      host: 'localhost',
-      port: nil,
+      host: 'host.docker.internal',
+      port: 3307,
       username: 'root',
-      password: nil,
+      password: 'root',
       database: 'isucon5q',
       encoding: 'utf8mb4',
       reconnect: true,
