@@ -1,0 +1,47 @@
+version: "3.5"
+
+services:
+  isucon5-portal:
+    image: isucon5-eventapp/latest
+    build:
+      context: ./
+    container_name: isucon5-portal
+    hostname: isucon5-portal
+    depends_on:
+      - isucon5-mysql
+    ports:
+      - "8081:8080"
+    environment:
+      - ISUCON5_DB_HOST=isucon5-mysql
+      - ISUCON5_DB_PASSWORD=root
+
+  isucon5-scores-updater:
+    image: isucon5-eventapp/latest
+    build:
+      context: ./
+    container_name: isucon5-scores-updater
+    hostname: isucon5-scores-updater
+    depends_on:
+      - isucon5-mysql
+      - isucon5-portal
+    environment:
+      - ISUCON5_DB_HOST=isucon5-mysql
+      - ISUCON5_DB_PASSWORD=root
+    command: >
+      bash -c 
+        "bundle exec ruby update_scores.rb"
+
+  isucon5-mysql:
+    image: mysql:5.6.51
+    container_name: isucon5-mysql
+    hostname: isucon5-mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+#      - ./db/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=isucon5portal
+      - MYSQL_USER=isucon5_user
+      - MYSQL_PASSWORD=user_isucon5
