@@ -4,10 +4,10 @@ require "mysql2-cs-bind"
 require "json"
 
 client = Mysql2::Client.new(
-  host: 'localhost',
-  port: nil,
+  host: 'isucon5-mysql',
+  port: 3306,
   username: 'root',
-  password: nil,
+  password: 'root',
   database: 'isucon5portal',
   reconnect: true,
 )

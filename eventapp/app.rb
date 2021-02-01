@@ -80,21 +80,23 @@ class Isucon5Portal::WebApp < Sinatra::Base
     end
 
     def in_game?(team)
-      now = Time.now
-      case team[:round]
-      when 1 then SATURDAY_GAMETIME.first < now && now < SATURDAY_GAMETIME.last
-      when 2 then SUNDAY_GAMETIME.first < now && now < SUNDAY_GAMETIME.last
-      when 0 then true
-      end
+#      now = Time.now
+#      case team[:round]
+#      when 1 then SATURDAY_GAMETIME.first < now && now < SATURDAY_GAMETIME.last
+#      when 2 then SUNDAY_GAMETIME.first < now && now < SUNDAY_GAMETIME.last
+#      when 0 then true
+#      end
+      return true
     end
 
     def active_team?(team)
-      now = Time.now
-      case team[:round]
-      when 1 then SATURDAY.first < now && now < SATURDAY.last
-      when 2 then SUNDAY.first < now && now < SUNDAY.last
-      when 0 then true
-      end
+#      now = Time.now
+#      case team[:round]
+#      when 1 then SATURDAY.first < now && now < SATURDAY.last
+#      when 2 then SUNDAY.first < now && now < SUNDAY.last
+#      when 0 then true
+#      end
+      return true
     end
 
     def authenticate(email, password)
@@ -247,14 +249,14 @@ SQL
 
     ip_address = params[:ip_address]
     if ip_address.nil? || ip_address.empty?
-      ip_address = Isucon5Portal::GCloud.valid_ip_address(team[:project_id], team[:zone_name], team[:instance_name])
+#      ip_address = Isucon5Portal::GCloud.valid_ip_address(team[:project_id], team[:zone_name], team[:instance_name])
     end
-    if ip_address.nil? || ip_address.empty?
-      return json({valid: false, message: "IPアドレスが取得できません"})
-    end
-    unless ip_address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/ && $1.to_i < 256 && $2.to_i < 256 && $3.to_i < 256 && $4.to_i < 256
-      return json({valid: false, message: "IPアドレスを入力してください"})
-    end
+#    if ip_address.nil? || ip_address.empty?
+#      return json({valid: false, message: "IPアドレスが取得できません"})
+#    end
+#    unless ip_address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/ && $1.to_i < 256 && $2.to_i < 256 && $3.to_i < 256 && $4.to_i < 256
+#      return json({valid: false, message: "IPアドレスを入力してください"})
+#    end
 
     testset_ids = db.xquery("SELECT id FROM testsets").map{|obj| obj[:id]}
     testset_id = testset_ids[rand(testset_ids.size)]
