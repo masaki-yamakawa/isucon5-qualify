@@ -3,9 +3,9 @@
 require "socket"
 MYHOSTNAME = Socket.gethostname
 
-MANAGER_ADDRESS = "104.155.221.244"
-MANAGER_USER = "portalsan"
-MANAGER_PASSWORD = "tony-morris"
+MANAGER_ADDRESS = "host.docker.internal"
+MANAGER_USER = "root"
+MANAGER_PASSWORD = "root"
 
 require "timeout"
 require "mysql2-cs-bind"
