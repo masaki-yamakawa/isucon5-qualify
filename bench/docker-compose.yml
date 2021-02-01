@@ -1,0 +1,9 @@
+version: "3.5"
+
+services:
+  isucon5-bench:
+    image: isucon5-bench/latest
+    build:
+      context: ./
+    container_name: isucon5-bench
+    hostname: isucon5-bench
