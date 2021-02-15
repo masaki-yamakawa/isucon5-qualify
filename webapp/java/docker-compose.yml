@@ -1,0 +1,16 @@
+version: "3.5"
+
+services:
+  isucon5-webapp:
+    image: isucon5-webapp/latest
+    build:
+      context: ./
+    container_name: isucon5-webapp
+    hostname: isucon5-webapp
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    external:
+      name: bench_default
