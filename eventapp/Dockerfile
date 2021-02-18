@@ -1,4 +1,4 @@
-FROM ruby:2.1.2
+FROM ruby:2.3.8
 
 ENV LANG C.UTF-8
 
