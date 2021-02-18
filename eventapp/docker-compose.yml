@@ -11,6 +11,8 @@ services:
       - isucon5-mysql
     ports:
       - "8081:8080"
+    volumes:
+      - ./data:/isucon5-eventapp/data
     environment:
       - ISUCON5_DB_HOST=isucon5-mysql
       - ISUCON5_DB_PASSWORD=root
