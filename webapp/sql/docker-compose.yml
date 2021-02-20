@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   isucon5q-mysql:
@@ -9,7 +9,7 @@ services:
       - "3307:3306"
     volumes:
       - ./db:/docker-entrypoint-initdb.d
-#      - ./db/mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=isucon5q
