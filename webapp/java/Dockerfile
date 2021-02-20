@@ -1,15 +1,16 @@
 # syntax = docker/dockerfile:1.0-experimental
 FROM maven:3.3.3-jdk-8 as builder
 
-WORKDIR /build
-COPY ./pom.xml .
-COPY ./src/ /build/src/
+COPY ./java/pom.xml /build/app/
+COPY ./java/src/ /build/app/src/
+COPY ./static/ /build/static/
+WORKDIR /build/app
 RUN --mount=type=cache,target=/root/.m2 \
     mvn clean package
 
 FROM openjdk:8-alpine
-COPY --from=builder /build/target/*.jar /app/libs/
-COPY --from=builder /build/src/main/resources/* /app/resources/
+COPY --from=builder /build/app/target/*.jar /app/libs/
+COPY --from=builder /build/app/src/main/resources/* /app/resources/
 CMD java -cp /app/resources \
       -DISUCON5_DB_HOST=${ISUCON5_DB_HOST} \
       -DISUCON5_DB_PORT=${ISUCON5_DB_PORT} \

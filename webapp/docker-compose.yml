@@ -5,6 +5,7 @@ services:
     image: isucon5-webapp/latest
     build:
       context: ./
+      dockerfile: ./java/Dockerfile
     container_name: isucon5-webapp
     hostname: isucon5-webapp
     ports:
