@@ -10,4 +10,10 @@ RUN --mount=type=cache,target=/root/.m2 \
 FROM openjdk:8-alpine
 COPY --from=builder /build/target/*.jar /app/libs/
 COPY --from=builder /build/src/main/resources/* /app/resources/
-CMD java -cp /app/resources -DISUCON5_DB_PASSWORD=root -DISUCON5_DB_HOST=host.docker.internal -DISUCON5_DB_PORT=3307 -DISUCON5_DB_NAME=isucon5q -jar app/libs/isuxi-0.0.1-SNAPSHOT.jar
+CMD java -cp /app/resources \
+      -DISUCON5_DB_HOST=${ISUCON5_DB_HOST} \
+      -DISUCON5_DB_PORT=${ISUCON5_DB_PORT} \
+      -DISUCON5_DB_NAME=${ISUCON5_DB_NAME} \
+      -DISUCON5_DB_USER=${ISUCON5_DB_USER} \
+      -DISUCON5_DB_PASSWORD=${ISUCON5_DB_PASSWORD} \
+      -jar app/libs/isuxi-0.0.1-SNAPSHOT.jar

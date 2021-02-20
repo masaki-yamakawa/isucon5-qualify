@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   isucon5-webapp:
@@ -9,3 +9,9 @@ services:
     hostname: isucon5-webapp
     ports:
       - "8080:8080"
+    environment:
+      - ISUCON5_DB_HOST=${DB_HOST}
+      - ISUCON5_DB_PORT=${DB_PORT}
+      - ISUCON5_DB_NAME=${DB_NAME}
+      - ISUCON5_DB_USER=${DB_USER}
+      - ISUCON5_DB_PASSWORD=${DB_PASS}
