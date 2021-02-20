@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 services:
   isucon5-datagen:
@@ -9,10 +9,9 @@ services:
     hostname: isucon5-datagen
     command: >
       bash -c 
-        "bundle exec ruby gen.rb help \
-         && bundle exec ruby gen.rb gen_users \
+        "bundle exec ruby gen.rb gen_users \
+         && bundle exec ruby gen.rb gen_relations \
          && bundle exec ruby gen.rb gen_entries \
          && bundle exec ruby gen.rb gen_comments \
          && bundle exec ruby gen.rb gen_footprints \
-         && bundle exec ruby gen.rb gen_relations \
          && bundle exec ruby gen.rb gen_testsets"
