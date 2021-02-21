@@ -4,7 +4,7 @@ services:
   isucon5-datagen:
     image: isucon5-datagen/latest
     build:
-      context: ./
+      context: ./script
     container_name: isucon5-datagen
     hostname: isucon5-datagen
     environment:
