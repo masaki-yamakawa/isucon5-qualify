@@ -7,3 +7,9 @@ services:
       context: ./
     container_name: isucon5-bench
     hostname: isucon5-bench
+    environment:
+      - ISUCON5_DB_HOST=${PORTAL_DB_HOST}
+      - ISUCON5_DB_PORT=${PORTAL_DB_PORT}
+      - ISUCON5_DB_NAME=${PORTAL_DB_NAME}
+      - ISUCON5_DB_USER=${PORTAL_DB_USER}
+      - ISUCON5_DB_PASSWORD=${PORTAL_DB_PASS}

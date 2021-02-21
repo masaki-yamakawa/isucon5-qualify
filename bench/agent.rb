@@ -3,9 +3,9 @@
 require "socket"
 MYHOSTNAME = Socket.gethostname
 
-MANAGER_ADDRESS = "host.docker.internal"
-MANAGER_USER = "root"
-MANAGER_PASSWORD = "root"
+MANAGER_ADDRESS = ENV['ISUCON5_DB_HOST'] || 'localhost'
+MANAGER_USER = ENV['ISUCON5_DB_USER'] || 'root'
+MANAGER_PASSWORD = ENV['ISUCON5_DB_PASSWORD'] || ''
 
 require "timeout"
 require "mysql2-cs-bind"
@@ -13,10 +13,10 @@ require "json"
 
 client = Mysql2::Client.new(
   host: MANAGER_ADDRESS,
-  port: 3306,
+  port: ENV['ISUCON5_DB_PORT'] && ENV['ISUCON5_DB_PORT'].to_i,
   username: MANAGER_USER,
   password: MANAGER_PASSWORD,
-  database: 'isucon5portal',
+  database: ENV['ISUCON5_DB_NAME'] || 'isucon5portal',
   reconnect: true,
 )
 client.query_options.merge!(symbolize_keys: true)
