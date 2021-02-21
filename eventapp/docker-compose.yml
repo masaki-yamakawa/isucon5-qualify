@@ -14,8 +14,11 @@ services:
     volumes:
       - ./data:/isucon5-eventapp/data
     environment:
-      - ISUCON5_DB_HOST=isucon5-mysql
-      - ISUCON5_DB_PASSWORD=root
+      - ISUCON5_DB_HOST=${PORTAL_DB_HOST}
+      - ISUCON5_DB_PORT=${PORTAL_DB_PORT}
+      - ISUCON5_DB_NAME=${PORTAL_DB_NAME}
+      - ISUCON5_DB_USER=${PORTAL_DB_USER}
+      - ISUCON5_DB_PASSWORD=${PORTAL_DB_PASS}
 
   isucon5-scores-updater:
     image: isucon5-eventapp/latest
@@ -27,8 +30,11 @@ services:
       - isucon5-mysql
       - isucon5-portal
     environment:
-      - ISUCON5_DB_HOST=isucon5-mysql
-      - ISUCON5_DB_PASSWORD=root
+      - ISUCON5_DB_HOST=${PORTAL_DB_HOST}
+      - ISUCON5_DB_PORT=${PORTAL_DB_PORT}
+      - ISUCON5_DB_NAME=${PORTAL_DB_NAME}
+      - ISUCON5_DB_USER=${PORTAL_DB_USER}
+      - ISUCON5_DB_PASSWORD=${PORTAL_DB_PASS}
     command: >
       bash -c 
         "bundle exec ruby update_scores.rb"
@@ -44,6 +50,6 @@ services:
       - ./mysql_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=isucon5portal
+      - MYSQL_DATABASE=${PORTAL_DB_NAME}
       - MYSQL_USER=isucon5_user
       - MYSQL_PASSWORD=user_isucon5

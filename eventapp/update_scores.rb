@@ -4,11 +4,11 @@ require "mysql2-cs-bind"
 require "json"
 
 client = Mysql2::Client.new(
-  host: 'isucon5-mysql',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'isucon5portal',
+  host: ENV['ISUCON5_DB_HOST'] || 'localhost',
+  port: ENV['ISUCON5_DB_PORT'] && ENV['ISUCON5_DB_PORT'].to_i,
+  username: ENV['ISUCON5_DB_USER'] || 'root',
+  password: ENV['ISUCON5_DB_PASSWORD'] || '',
+  database: ENV['ISUCON5_DB_NAME'] || 'isucon5portal',
   reconnect: true,
 )
 client.query_options.merge!(symbolize_keys: true)
