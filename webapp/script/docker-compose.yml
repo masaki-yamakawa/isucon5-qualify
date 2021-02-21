@@ -7,6 +7,12 @@ services:
       context: ./
     container_name: isucon5-datagen
     hostname: isucon5-datagen
+    environment:
+      - ISUCON5Q_DB_HOST=${DB_HOST}
+      - ISUCON5Q_DB_PORT=${DB_PORT}
+      - ISUCON5Q_DB_NAME=${DB_NAME}
+      - ISUCON5Q_DB_USER=${DB_USER}
+      - ISUCON5Q_DB_PASSWORD=${DB_PASS}
     command: >
       bash -c 
         "bundle exec ruby gen.rb gen_users \

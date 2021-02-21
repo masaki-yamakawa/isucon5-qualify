@@ -274,11 +274,11 @@ class Command < Thor
   def db
     return @client if @client
     @client = Mysql2::Client.new(
-      host: 'host.docker.internal',
-      port: 3307,
-      username: 'root',
-      password: 'root',
-      database: 'isucon5q',
+      host: ENV['ISUCON5Q_DB_HOST'] || 'localhost',
+      port: ENV['ISUCON5Q_DB_PORT'] && ENV['ISUCON5Q_DB_PORT'].to_i,
+      username: ENV['ISUCON5Q_DB_USER'] || 'root',
+      password: ENV['ISUCON5Q_DB_PASSWORD'] || '',
+      database: ENV['ISUCON5Q_DB_NAME'] || 'isucon5q',
       encoding: 'utf8mb4',
       reconnect: true,
     )
