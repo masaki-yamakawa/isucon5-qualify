@@ -6,11 +6,11 @@ require "json"
 teams_tsv_path, testsets_json_path = ARGV
 
 client = Mysql2::Client.new(
-  host: 'isucon5-mysql',
-  port: nil,
-  username: 'root',
-  password: 'root',
-  database: 'isucon5portal',
+  host: ENV['ISUCON5_DB_HOST'] || 'localhost',
+  port: ENV['ISUCON5_DB_PORT'] && ENV['ISUCON5_DB_PORT'].to_i,
+  username: ENV['ISUCON5_DB_USER'] || 'root',
+  password: ENV['ISUCON5_DB_PASSWORD'] || '',
+  database: ENV['ISUCON5_DB_NAME'] || 'isucon5portal',
   reconnect: true,
 )
 
