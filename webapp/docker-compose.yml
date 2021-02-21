@@ -8,6 +8,8 @@ services:
       dockerfile: ./java/Dockerfile
     container_name: isucon5-webapp
     hostname: isucon5-webapp
+    depends_on:
+      - isucon5q-mysql
     ports:
       - "8080:8080"
     environment:
@@ -16,3 +18,18 @@ services:
       - ISUCON5_DB_NAME=${DB_NAME}
       - ISUCON5_DB_USER=${DB_USER}
       - ISUCON5_DB_PASSWORD=${DB_PASS}
+
+  isucon5q-mysql:
+    image: mysql:5.6.51
+    container_name: isucon5q-mysql
+    hostname: isucon5q-mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./sql/db:/docker-entrypoint-initdb.d
+      - ./sql/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=isucon5q_user
+      - MYSQL_PASSWORD=user_isucon5q

@@ -8,3 +8,6 @@ target
 .idea
 .bundle
 vendor
+/webapp/sql/db/*
+/webapp/sql/mysql_data/*
+!.gitkeep
